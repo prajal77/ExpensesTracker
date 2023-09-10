@@ -70,13 +70,23 @@ const Menu = () => {
     const numPizzas = pizzas.length;
     return <main className="menu">
         <h2>Our menu</h2>
-        {
+        {/* {
             numPizzas > 0 && (
                 <ul className="pizzas">
                     {pizzaData.map((pizza) => <Pizza pizzaObj={pizza} key={pizza.name}
                     />)}
                 </ul>
             )
+        } */}
+        {
+            // conditional redering using ternary  
+            numPizzas > 0 ? (
+                <ul className="pizzas">
+                    {pizzaData.map((pizza) => (
+                        <Pizza pizzaObj={pizza} key={pizza.name} />
+                    ))}
+                </ul>
+            ) : (<p> We're still working on our menu. Please come back later:</p>)
         }
 
         {/* <Pizza name="Pizza Spinaci" 
@@ -91,6 +101,8 @@ const Menu = () => {
 };
 
 const Pizza = (props) => {
+    // multiple return 
+    if (props.pizzaObj.soldOut) return null;
     return <li className="pizza">
         <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
         <div>
@@ -108,6 +120,14 @@ const Footer = () => {
     const closeHour = 22;
     const isOpen = hour >= openHour && hour <= closeHour;
     console.log(isOpen);
+
+    // conditional Rendering with Multiple Returns
+    // if (!isOpen)
+    //     return (
+    //         <p>
+    //             We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+    //         </p>)
+
     return <footer className="footer">
         {/* Conditional Rendering using short circuting( if we have some true or some truthy value such as first
          value(isOpen) is true the secound value will be retured in case that condition is true   )
